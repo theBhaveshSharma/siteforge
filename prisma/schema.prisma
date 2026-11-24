@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum SiteStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model User {
+  id        String   @id // Clerk userId
+  email     String?
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  sites     Site[]
+}
+
+model Template {
+  id           String   @id // componentKey e.g. "cafe"
+  name         String
+  category     String
+  description  String
+  thumbnail    String
+  componentKey String   @unique
+  createdAt    DateTime @default(now())
+  sites        Site[]
+}
+
+model Site {
+  id         String     @id @default(cuid())
+  ownerId    String
+  owner      User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  name       String
+  slug       String     @unique
+  templateId String
+  template   Template   @relation(fields: [templateId], references: [id])
+  status     SiteStatus @default(DRAFT)
+  content    String     // JSON string of SiteContent
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@index([ownerId])
+  @@index([status])
+}
