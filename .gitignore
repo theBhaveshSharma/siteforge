@@ -39,6 +39,8 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+.env.neon
+.neon/
 
 # local data
 /prisma/dev.db
@@ -53,3 +55,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .clerk/
+.neon

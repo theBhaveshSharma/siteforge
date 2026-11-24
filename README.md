@@ -2,6 +2,8 @@
 
 Landing page generator for small businesses. Sign in, create multiple sites from industry templates, publish live at `/s/[slug]`, edit anytime, and download a static ZIP.
 
+**Live:** [https://siteforge-rouge.vercel.app](https://siteforge-rouge.vercel.app)
+
 ## Setup
 
 1. Install dependencies:
@@ -10,7 +12,7 @@ Landing page generator for small businesses. Sign in, create multiple sites from
 npm install
 ```
 
-2. Copy env and add [Clerk](https://dashboard.clerk.com) keys:
+2. Copy env and add [Clerk](https://dashboard.clerk.com) keys plus a Postgres `DATABASE_URL` (Neon, Vercel Postgres, etc.):
 
 ```bash
 cp .env.example .env
